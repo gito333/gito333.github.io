@@ -149,8 +149,8 @@
       const last = s.points[s.points.length - 1];
       el("circle", { cx: X(last[0]), cy: Y(last[1]), r: 4.5,
         fill: css(s.color), stroke: css("--surface-1"), "stroke-width": 2 }, svg);
-      // direct end label (text token + value)
-      const lab = el("text", { x: X(last[0]) + 9, y: Y(last[1]) + 4,
+      // direct end label (text token + value); labelDy resolves collisions
+      const lab = el("text", { x: X(last[0]) + 9, y: Y(last[1]) + 4 + (s.labelDy || 0),
         "font-size": 12, fill: css("--text-primary"), "font-weight": 600 }, svg);
       lab.textContent = s.endLabel || s.name + " " + fmt(last[1]);
     });
@@ -188,7 +188,7 @@
       cross.setAttribute("x1", X(ref[0]));
       cross.setAttribute("x2", X(ref[0]));
       cross.setAttribute("visibility", "visible");
-      let html = `<div class="tt-title">${cfg.xLabel || ""} ${Math.round(ref[0])}</div>`;
+      let html = `<div class="tt-title">${cfg.xLabel || ""} ${Math.floor(ref[0])}</div>`;
       cfg.series.forEach((s, i) => {
         const p = nearest(s.points, ref[0]);
         dots[i].setAttribute("cx", X(p[0]));
@@ -222,7 +222,7 @@
     // data table
     const xs = [...new Set(cfg.series.flatMap((s) => s.points.map((p) => p[0])))].sort((a, b) => a - b);
     const rows = xs.map((x) => [
-      String(Math.round(x)),
+      x % 1 ? Math.floor(x) + " (jul)" : String(x),
       ...cfg.series.map((s) => {
         const p = s.points.find((q) => q[0] === x);
         return p ? p[1] : null;

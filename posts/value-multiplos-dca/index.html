@@ -163,10 +163,10 @@ Al Nasdaq, 15. Pero "el mercado" no es una cosa: mientras lo caro se estancaba,
 lo barato rindió — y mucho.</p>
 
 <figure class="chart" id="chart-decade">
-  <p class="chart-title">La "década perdida" no fue de todos (2000-2013)</p>
-  <p class="chart-sub">Evolución de 100 invertidos a inicio de 2000. Retorno total anual aproximado; Nasdaq solo precio.</p>
+  <p class="chart-title">La "década perdida" no fue de todos (2000 - julio 2026)</p>
+  <p class="chart-sub">Evolución de 100 invertidos a inicio de 2000. Retorno total anual aproximado; Nasdaq solo precio. Último punto: 30 de junio de 2026.</p>
   <div class="chart-slot"></div>
-  <figcaption>Elaboración propia con retornos anuales aproximados en USD: S&amp;P 500 y MSCI Emergentes con dividendos, Nasdaq Composite solo precio, oro precio spot.</figcaption>
+  <figcaption>Elaboración propia con retornos anuales aproximados en USD: S&amp;P 500 y MSCI Emergentes con dividendos, Nasdaq Composite solo precio, oro precio spot. 2025-2026: FT Portfolios, World Gold Council, J.P. Morgan.</figcaption>
 </figure>
 
 <p>Emergentes multiplicó por ~3 entre 2000 y 2013 pese a dos crashes por el
@@ -179,6 +179,16 @@ hizo DCA en el S&amp;P durante esos años acabó bien, porque compró barato en
 pico; la diversificación por estilo y geografía funcionó justo cuando hizo
 falta; y los dividendos convierten un índice "plano" en precio en un 2-3% anual
 igualmente.</p>
+
+<p>Extendiendo el gráfico hasta hoy se ve el segundo acto: a partir de 2013 el
+patrón se invirtió y el growth americano dominó una década (el Nasdaq multiplicó
+por 9 desde su valle de 2009), mientras emergentes se estancaba. Y un tercer
+giro reciente: el oro (+67% en 2025) y los emergentes (+34% en 2025, +22% en el
+primer semestre de 2026) vuelven a liderar. En el período completo 2000-2026,
+el activo ganador no es la bolsa americana — es el oro, y quien compró Nasdaq
+en el pico de 2000 sigue por detrás del S&amp;P 26 años después. El liderazgo
+rota, y suele rotar justo cuando comprar el ganador de la década anterior parece
+más seguro.</p>
 
 <h2>La dispersión de valoraciones hoy</h2>
 
@@ -288,16 +298,16 @@ lineChart("chart-decade", {
   ariaLabel: "Evolución de 100 dólares invertidos en 2000 en S&P 500, Nasdaq, emergentes y oro hasta 2013",
   marginRight: 118,
   series: [
-    { name: "S&P 500", color: "--series-1", endLabel: "S&P 500: 164",
-      points: [[2000,100],[2001,90.9],[2002,80.1],[2003,62.4],[2004,80.3],[2005,89.0],[2006,93.4],[2007,108.1],[2008,114.1],[2009,71.9],[2010,90.9],[2011,104.7],[2012,106.9],[2013,124.0],[2014,164.1]] },
-    { name: "Nasdaq", color: "--series-2", endLabel: "Nasdaq: 102",
-      points: [[2000,100],[2001,60.7],[2002,47.9],[2003,32.8],[2004,49.2],[2005,53.4],[2006,54.2],[2007,59.3],[2008,65.1],[2009,38.7],[2010,55.7],[2011,65.1],[2012,63.9],[2013,74.1],[2014,102.5]] },
-    { name: "MSCI Emergentes", color: "--series-3", endLabel: "Emergentes: 286",
-      points: [[2000,100],[2001,69.4],[2002,67.7],[2003,63.6],[2004,99.1],[2005,124.5],[2006,166.8],[2007,220.5],[2008,307.4],[2009,143.6],[2010,256.3],[2011,304.7],[2012,248.6],[2013,293.8],[2014,286.2]] },
-    { name: "Oro", color: "--series-4", endLabel: "Oro: 416",
-      points: [[2000,100],[2001,94.5],[2002,96.9],[2003,120.8],[2004,144.5],[2005,152.0],[2006,179.7],[2007,220.7],[2008,290.0],[2009,306.8],[2010,380.1],[2011,492.2],[2012,541.9],[2013,579.8],[2014,415.7]] }
+    { name: "S&P 500", color: "--series-1", endLabel: "S&P 500: 830",
+      points: [[2000,100],[2001,90.9],[2002,80.1],[2003,62.4],[2004,80.3],[2005,89.0],[2006,93.4],[2007,108.1],[2008,114.1],[2009,71.9],[2010,90.9],[2011,104.7],[2012,106.9],[2013,124.0],[2014,164.1],[2015,186.6],[2016,189.2],[2017,211.9],[2018,258.1],[2019,246.7],[2020,324.4],[2021,384.1],[2022,494.3],[2023,404.8],[2024,511.3],[2025,639.1],[2026,753.5],[2026.5,830.4]] },
+    { name: "Nasdaq", color: "--series-2", endLabel: "Nasdaq: 659", labelDy: -8,
+      points: [[2000,100],[2001,60.7],[2002,47.9],[2003,32.8],[2004,49.2],[2005,53.4],[2006,54.2],[2007,59.3],[2008,65.1],[2009,38.7],[2010,55.7],[2011,65.1],[2012,63.9],[2013,74.1],[2014,102.5],[2015,116.2],[2016,122.8],[2017,132.0],[2018,169.2],[2019,162.6],[2020,219.9],[2021,315.8],[2022,383.4],[2023,256.5],[2024,367.8],[2025,473.0],[2026,572.8],[2026.5,658.7]] },
+    { name: "MSCI Emergentes", color: "--series-3", endLabel: "Emergentes: 654", labelDy: 9,
+      points: [[2000,100],[2001,69.4],[2002,67.7],[2003,63.6],[2004,99.1],[2005,124.5],[2006,166.8],[2007,220.5],[2008,307.4],[2009,143.6],[2010,256.3],[2011,304.7],[2012,248.6],[2013,293.8],[2014,286.2],[2015,279.9],[2016,238.2],[2017,264.9],[2018,363.7],[2019,310.6],[2020,367.7],[2021,435.0],[2022,424.1],[2023,338.9],[2024,372.1],[2025,400.0],[2026,534.4],[2026.5,654.1]] },
+    { name: "Oro", color: "--series-4", endLabel: "Oro: 1.408",
+      points: [[2000,100],[2001,94.5],[2002,96.9],[2003,120.8],[2004,144.5],[2005,152.0],[2006,179.7],[2007,220.7],[2008,290.0],[2009,306.8],[2010,380.1],[2011,492.2],[2012,541.9],[2013,579.8],[2014,415.7],[2015,409.5],[2016,366.9],[2017,398.1],[2018,450.2],[2019,443.0],[2020,524.1],[2021,655.7],[2022,632.1],[2023,630.2],[2024,712.7],[2025,906.6],[2026,1514.0],[2026.5,1408.0]] }
   ],
-  xTicks: [2000,2002,2004,2006,2008,2010,2012,2014]
+  xTicks: [2000,2005,2010,2015,2020,2026]
 });
 
 // ---- valuation dispersion today ----
