@@ -3,20 +3,52 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cuaderno</title>
-<meta name="description" content="Notas sobre inversión y tecnología.">
+<title>Cuaderno · Notas sobre tecnología e inversión</title>
+<meta name="description" content="Notas sobre datos, IA, la infraestructura que monto en casa y mis decisiones de inversión.">
+<link rel="canonical" href="https://gito333.github.io/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="Cuaderno" href="feed.xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cuaderno">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Cuaderno · Notas sobre tecnología e inversión">
+<meta property="og:description" content="Notas sobre datos, IA, la infraestructura que monto en casa y mis decisiones de inversión.">
+<meta property="og:url" content="https://gito333.github.io/">
+<meta property="og:image" content="https://gito333.github.io/assets/og/default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/blog.css">
 </head>
 <body>
 <div class="wrap">
 
 <header class="site">
-  <a href="./">Cuaderno</a>
-  <div class="tagline">Notas sobre inversión y tecnología</div>
+  <div>
+    <a class="brand" href="./">Cuaderno</a>
+    <div class="tagline">Notas sobre tecnología e inversión</div>
+  </div>
+  <nav>
+    <a href="./" aria-current="page">Blog</a>
+    <a href="/Portfolio/">Portfolio</a>
+    <a href="https://github.com/gito333">GitHub</a>
+    <a href="feed.xml">RSS</a>
+  </nav>
 </header>
 
 <main>
-  <a class="post-card" href="posts/servidor-casero/">
+  <p class="intro">Escribo sobre <strong>datos e IA</strong>, la
+  <strong>infraestructura</strong> que monto en casa y mis decisiones de
+  <strong>inversión</strong>. Si quieres saber más sobre mí, pasa por mi
+  <a href="/Portfolio/">portfolio</a>.</p>
+
+  <div class="filters" hidden>
+    <button type="button" data-filter="" aria-pressed="true">Todos</button>
+    <button type="button" data-filter="tecnologia" aria-pressed="false">Tecnología</button>
+    <button type="button" data-filter="inversion" aria-pressed="false">Inversión</button>
+  </div>
+
+  <a class="post-card" data-tag="tecnologia" href="posts/servidor-casero/">
     <div class="date">29 de octubre de 2026 · <span class="tag">Tecnología</span></div>
     <h2>Un mini PC como servidor casero: red privada, Docker, observabilidad y agentes de IA</h2>
     <p>Cómo está montado mi servidor de casa: Tailscale sin puertos abiertos a
@@ -25,7 +57,7 @@
     siguen todos las mismas reglas. Con diagrama.</p>
   </a>
 
-  <a class="post-card" href="posts/value-multiplos-dca/">
+  <a class="post-card" data-tag="inversion" href="posts/value-multiplos-dca/">
     <div class="date">8 de julio de 2026 · <span class="tag">Inversión</span></div>
     <h2>Invertir un capital de seis cifras en 2026: value, múltiplos históricos y la pregunta del DCA</h2>
     <p>Lump sum o DCA con el CAPE en 39,8, cuántos fondos value hacen falta de
@@ -36,9 +68,29 @@
 </main>
 
 <footer class="site">
-  Los artículos de inversión no son asesoramiento financiero.
+  <span>Los artículos de inversión no son asesoramiento financiero.</span>
+  <span class="links">
+    <a href="/Portfolio/">Portfolio</a>
+    <a href="https://github.com/gito333">GitHub</a>
+    <a href="feed.xml">RSS</a>
+  </span>
 </footer>
 
 </div>
+<script>
+(function () {
+  var bar = document.querySelector(".filters");
+  var buttons = bar.querySelectorAll("button");
+  var cards = document.querySelectorAll(".post-card");
+  bar.hidden = false;
+  bar.addEventListener("click", function (e) {
+    var btn = e.target.closest("button");
+    if (!btn) return;
+    var tag = btn.dataset.filter;
+    buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
+    cards.forEach(function (c) { c.hidden = tag !== "" && c.dataset.tag !== tag; });
+  });
+})();
+</script>
 </body>
 </html>

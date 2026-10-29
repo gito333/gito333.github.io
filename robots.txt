@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gito333.github.io/sitemap.xml

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Cuaderno</title>
+  <link>https://gito333.github.io/</link>
+  <atom:link href="https://gito333.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Notas sobre tecnología e inversión.</description>
+  <language>es</language>
+  <lastBuildDate>Thu, 29 Oct 2026 12:00:00 +0000</lastBuildDate>
+  <item>
+    <title>Un mini PC como servidor casero: red privada, Docker, observabilidad y agentes de IA</title>
+    <link>https://gito333.github.io/posts/servidor-casero/</link>
+    <guid>https://gito333.github.io/posts/servidor-casero/</guid>
+    <pubDate>Thu, 29 Oct 2026 12:00:00 +0000</pubDate>
+    <category>Tecnología</category>
+    <description>Cómo está montado mi servidor casero: Tailscale sin puertos abiertos, Docker con Portainer, métricas, logs y trazas con VictoriaMetrics, copias cifradas en Google Drive y agentes de IA que siguen las mismas reglas.</description>
+  </item>
+  <item>
+    <title>Invertir un capital de seis cifras en 2026: value, múltiplos históricos y la pregunta del DCA</title>
+    <link>https://gito333.github.io/posts/value-multiplos-dca/</link>
+    <guid>https://gito333.github.io/posts/value-multiplos-dca/</guid>
+    <pubDate>Wed, 08 Jul 2026 12:00:00 +0000</pubDate>
+    <category>Inversión</category>
+    <description>Lump sum o DCA con el CAPE en máximos, cuántos fondos value hacen falta, y qué nos enseña la década 2000-2013 sobre la dispersión de valoraciones actual.</description>
+  </item>
+</channel>
+</rss>
