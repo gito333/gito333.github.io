@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Cuaderno</title>
-  <link>https://gito333.github.io/</link>
+  <title>Rodrigo Rincón Sánchez · Blog</title>
+  <link>https://gito333.github.io/blog/</link>
   <atom:link href="https://gito333.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-  <description>Notas sobre tecnología e inversión.</description>
+  <description>Notas sobre datos, IA, infraestructura e inversión.</description>
   <language>es</language>
   <lastBuildDate>Thu, 29 Oct 2026 12:00:00 +0000</lastBuildDate>
   <item>

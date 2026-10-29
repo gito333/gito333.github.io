@@ -3,21 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cuaderno · Notas sobre tecnología e inversión</title>
-<meta name="description" content="Notas sobre datos, IA, la infraestructura que monto en casa y mis decisiones de inversión.">
+<title>Rodrigo Rincón Sánchez · Datos, IA e infraestructura</title>
+<meta name="description" content="Científico de datos en la Universidad Politécnica de Madrid. Datos, IA, recuperación de información e infraestructura; profesor de sistemas operativos.">
 <link rel="canonical" href="https://gito333.github.io/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="alternate" type="application/rss+xml" title="Cuaderno" href="feed.xml">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Cuaderno">
+<link rel="alternate" type="application/rss+xml" title="Rodrigo Rincón Sánchez · Blog" href="feed.xml">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Rodrigo Rincón Sánchez">
 <meta property="og:locale" content="es_ES">
-<meta property="og:title" content="Cuaderno · Notas sobre tecnología e inversión">
-<meta property="og:description" content="Notas sobre datos, IA, la infraestructura que monto en casa y mis decisiones de inversión.">
+<meta property="og:title" content="Rodrigo Rincón Sánchez · Datos, IA e infraestructura">
+<meta property="og:description" content="Científico de datos en la Universidad Politécnica de Madrid. Datos, IA, recuperación de información e infraestructura; profesor de sistemas operativos.">
 <meta property="og:url" content="https://gito333.github.io/">
-<meta property="og:image" content="https://gito333.github.io/assets/og/default.png">
+<meta property="og:image" content="https://gito333.github.io/assets/og/default.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
+<meta property="profile:first_name" content="Rodrigo">
+<meta property="profile:last_name" content="Rincón Sánchez">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rodrigo Rincón Sánchez",
+  "jobTitle": "Científico de datos",
+  "worksFor": {"@type": "Organization", "name": "Universidad Politécnica de Madrid"},
+  "url": "https://gito333.github.io/",
+  "sameAs": ["https://www.linkedin.com/in/rodrigorinconsanchez/", "https://github.com/gito333"]
+}
+</script>
 <link rel="stylesheet" href="assets/blog.css">
 </head>
 <body>
@@ -25,72 +38,187 @@
 
 <header class="site">
   <div>
-    <a class="brand" href="./">Cuaderno</a>
-    <div class="tagline">Notas sobre tecnología e inversión</div>
+    <a class="brand" href="./">Rodrigo Rincón</a>
+    <div class="tagline">Datos, IA e infraestructura</div>
   </div>
   <nav>
-    <a href="./" aria-current="page">Blog</a>
-    <a href="/Portfolio/">Portfolio</a>
+    <a href="./" aria-current="page">Inicio</a>
+    <a href="blog/">Blog</a>
+    <a href="https://www.linkedin.com/in/rodrigorinconsanchez/">LinkedIn</a>
     <a href="https://github.com/gito333">GitHub</a>
-    <a href="feed.xml">RSS</a>
   </nav>
 </header>
 
 <main>
-  <p class="intro">Escribo sobre <strong>datos e IA</strong>, la
-  <strong>infraestructura</strong> que monto en casa y mis decisiones de
-  <strong>inversión</strong>. Si quieres saber más sobre mí, pasa por mi
-  <a href="/Portfolio/">portfolio</a>.</p>
 
-  <div class="filters" hidden>
-    <button type="button" data-filter="" aria-pressed="true">Todos</button>
-    <button type="button" data-filter="tecnologia" aria-pressed="false">Tecnología</button>
-    <button type="button" data-filter="inversion" aria-pressed="false">Inversión</button>
+<section class="hero">
+  <h1>Rodrigo Rincón Sánchez</h1>
+  <p class="role">Científico de datos en la Universidad Politécnica de Madrid</p>
+  <p>Trabajo con datos e inteligencia artificial: análisis y métricas para la
+  dirección de la universidad y, antes, sistemas RAG con modelos de lenguaje
+  locales para el ámbito sanitario. También doy clase de sistemas operativos y
+  de recuperación de información.</p>
+  <p>Fuera del trabajo mantengo un servidor en casa donde pruebo agentes de IA,
+  observabilidad e infraestructura, y escribo sobre ello (y sobre inversión) en
+  el <a href="blog/">blog</a>.</p>
+  <div class="links-row">
+    <a class="primary" href="https://www.linkedin.com/in/rodrigorinconsanchez/">LinkedIn</a>
+    <a href="https://github.com/gito333">GitHub</a>
+    <a href="blog/">Blog</a>
   </div>
+</section>
 
-  <a class="post-card" data-tag="tecnologia" href="posts/servidor-casero/">
+<section class="block" id="experiencia">
+  <h2>Experiencia</h2>
+  <ul class="timeline">
+    <li>
+      <div class="when">2025 – hoy</div>
+      <div>
+        <h3>Científico de datos</h3>
+        <div class="org">Rectorado · Universidad Politécnica de Madrid</div>
+        <p>Análisis estadístico, métricas e informes para la toma de decisiones
+        de la universidad: cuadros de mando, calidad del dato y apoyo a la
+        planificación estratégica junto a distintos servicios.</p>
+        <div class="chips"><span>Python</span><span>Estadística</span><span>Cuadros de mando</span><span>Calidad del dato</span></div>
+      </div>
+    </li>
+    <li>
+      <div class="when">2025</div>
+      <div>
+        <h3>Profesor de IA</h3>
+        <div class="org">Samsung</div>
+        <p>Recuperación de información, de los índices invertidos, TF-IDF y BM25
+        a los embeddings, la recuperación densa y los sistemas RAG con LLMs.</p>
+        <div class="chips"><span>Recuperación de información</span><span>BM25</span><span>Embeddings</span><span>RAG</span></div>
+      </div>
+    </li>
+    <li>
+      <div class="when">2024 – 2025</div>
+      <div>
+        <h3>Investigador en ciencia de datos</h3>
+        <div class="org">Centro de Tecnología Biomédica (CTB) · UPM</div>
+        <p>Sistemas RAG con LLMs locales para apoyar a profesionales sanitarios.
+        Comparación de técnicas de recuperación y validación con médicos para que
+        las soluciones sirvieran en la práctica clínica.</p>
+        <div class="chips"><span>RAG</span><span>LLMs locales</span><span>Python</span><span>IA en salud</span></div>
+      </div>
+    </li>
+    <li>
+      <div class="when">2024 – hoy</div>
+      <div>
+        <h3>Profesor de Sistemas Operativos</h3>
+        <div class="org">International American University</div>
+        <p>Procesos, memoria, concurrencia, planificación y sistemas de archivos,
+        con prácticas en C sobre Unix/Linux.
+        <a href="https://github.com/gito333/iau-exercises">Ejercicios en GitHub</a>.</p>
+        <div class="chips"><span>Sistemas operativos</span><span>C</span><span>Unix/Linux</span><span>Concurrencia</span></div>
+      </div>
+    </li>
+    <li>
+      <div class="when">2023 – 2024</div>
+      <div>
+        <h3>Desarrollador de software</h3>
+        <div class="org">Accenture</div>
+        <p>Microservicios con Quarkus y APIs REST para clientes internacionales,
+        en un equipo distribuido entre varios países.</p>
+        <div class="chips"><span>Java</span><span>Quarkus</span><span>Microservicios</span><span>Docker</span><span>Kubernetes</span></div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<section class="block" id="formacion">
+  <h2>Formación</h2>
+  <ul class="timeline">
+    <li>
+      <div class="when">2024 – 2025</div>
+      <div>
+        <h3>Máster en Ciencia de Datos</h3>
+        <div class="org">Universidad Politécnica de Madrid</div>
+      </div>
+    </li>
+    <li>
+      <div class="when">2022 – 2024</div>
+      <div>
+        <h3>42 Madrid</h3>
+        <div class="org">Fundación Telefónica</div>
+        <p>Programación en C y de sistemas con aprendizaje entre pares.</p>
+      </div>
+    </li>
+    <li>
+      <div class="when">2020 – 2024</div>
+      <div>
+        <h3>Grado en Informática</h3>
+        <div class="org">Universidad Politécnica de Madrid</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<section class="block" id="proyectos">
+  <h2>Proyectos personales</h2>
+  <div class="projects">
+    <div class="project">
+      <h3>Servidor casero</h3>
+      <p>Mini PC sin puertos abiertos a Internet: acceso por Tailscale, servicios
+      en Docker, métricas, logs y trazas con OpenTelemetry y copias diarias
+      cifradas.</p>
+      <div class="more"><a href="posts/servidor-casero/">Leer el artículo →</a></div>
+      <div class="chips"><span>Tailscale</span><span>Docker</span><span>OpenTelemetry</span><span>restic</span></div>
+    </div>
+    <div class="project">
+      <h3>Asistente de WhatsApp con memoria</h3>
+      <p>Agente que recuerda las conversaciones, entiende y responde notas de voz
+      con Whisper y Piper en CPU, y consulta otras aplicaciones mediante MCP.</p>
+      <div class="chips"><span>Agentes</span><span>MCP</span><span>Whisper</span><span>SQLite</span></div>
+    </div>
+    <div class="project">
+      <h3>Agentes de rediseño web</h3>
+      <p>Flujo con varios modelos que localiza comercios de mi zona, audita sus
+      webs, diseña y programa una alternativa. Una revisión independiente solo la
+      aprueba con un 9/10 o más.</p>
+      <div class="chips"><span>Claude</span><span>Gemini</span><span>Multiagente</span><span>Node.js</span></div>
+    </div>
+    <div class="project">
+      <h3>Finanzas personales</h3>
+      <p>Aplicación web para seguir ingresos, gastos y patrimonio, con un
+      servidor MCP para consultarla desde agentes de IA.</p>
+      <div class="chips"><span>FastAPI</span><span>React</span><span>PocketBase</span><span>MCP</span></div>
+    </div>
+    <div class="project">
+      <h3>Renders 3D con GPU bajo demanda</h3>
+      <p>El servidor no tiene GPU: un pequeño hub enciende una máquina de Google
+      Colab y lanza allí los flujos de ComfyUI a través de un túnel SSH.</p>
+      <div class="chips"><span>ComfyUI</span><span>Google Colab</span><span>SSH</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="articulos">
+  <h2>Últimos artículos <a href="blog/">Ver todos →</a></h2>
+
+  <a class="post-card" href="posts/servidor-casero/">
     <div class="date">29 de octubre de 2026 · <span class="tag">Tecnología</span></div>
     <h2>Un mini PC como servidor casero: red privada, Docker, observabilidad y agentes de IA</h2>
-    <p>Cómo está montado mi servidor de casa: Tailscale sin puertos abiertos a
-    Internet, Docker con Portainer, métricas, logs y trazas con el stack de
-    VictoriaMetrics, copias cifradas en Google Drive y agentes de IA que
-    siguen todos las mismas reglas. Con diagrama.</p>
   </a>
 
-  <a class="post-card" data-tag="inversion" href="posts/value-multiplos-dca/">
+  <a class="post-card" href="posts/value-multiplos-dca/">
     <div class="date">8 de julio de 2026 · <span class="tag">Inversión</span></div>
     <h2>Invertir un capital de seis cifras en 2026: value, múltiplos históricos y la pregunta del DCA</h2>
-    <p>Lump sum o DCA con el CAPE en 39,8, cuántos fondos value hacen falta de
-    verdad, qué papel dejan las acciones sueltas, y qué enseña la década
-    2000-2013 sobre la dispersión de valoraciones actual. Con gráficos y datos
-    de julio de 2026.</p>
   </a>
+</section>
+
 </main>
 
 <footer class="site">
-  <span>Los artículos de inversión no son asesoramiento financiero.</span>
+  <span>Rodrigo Rincón Sánchez</span>
   <span class="links">
-    <a href="/Portfolio/">Portfolio</a>
+    <a href="https://www.linkedin.com/in/rodrigorinconsanchez/">LinkedIn</a>
     <a href="https://github.com/gito333">GitHub</a>
     <a href="feed.xml">RSS</a>
   </span>
 </footer>
 
 </div>
-<script>
-(function () {
-  var bar = document.querySelector(".filters");
-  var buttons = bar.querySelectorAll("button");
-  var cards = document.querySelectorAll(".post-card");
-  bar.hidden = false;
-  bar.addEventListener("click", function (e) {
-    var btn = e.target.closest("button");
-    if (!btn) return;
-    var tag = btn.dataset.filter;
-    buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
-    cards.forEach(function (c) { c.hidden = tag !== "" && c.dataset.tag !== tag; });
-  });
-})();
-</script>
 </body>
 </html>
