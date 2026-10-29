@@ -1,0 +1,86 @@
+# Infraestructura del servidor casero.
+# Generar: d2 --layout=elk --theme=0 --dark-theme=200 --pad=24 infraestructura.d2 infraestructura.svg
+
+direction: down
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+  }
+}
+
+classes: {
+  svc: {style.border-radius: 6}
+  ext: {shape: cloud}
+  data: {shape: cylinder}
+  red: {shape: hexagon}
+}
+
+clientes: Clientes {
+  fuera: Portátil y móvil\n(fuera de casa)
+  casa: Dispositivos\nde casa
+}
+
+tailnet: Tailnet\n(WireGuard) {class: red}
+router: Router\n(red local) {class: red}
+
+clientes.fuera -> tailnet
+clientes.casa -> router
+
+server: "Mini PC · Ubuntu · 16 hilos · 12 GB · 1 TB" {
+  host: Servicios del host {
+    tsserve: Tailscale Serve\n(HTTPS con certificado) {class: svc}
+    dns: dnsmasq\n(DNS de la LAN) {class: svc}
+    t3: T3 Code\n(Claude Code, Codex,\nAntigravity, OpenCode) {class: svc}
+    backup: Copias con restic\n(diarias, cifradas) {class: svc}
+  }
+
+  docker: Docker · desplegado con Portainer {
+    asistente: Asistente de WhatsApp\n(agente, memoria, Whisper, Piper) {class: svc}
+
+    apps: Aplicaciones {
+      grid-columns: 2
+      finanzas: Finanzas personales\n(web, API, PocketBase, Redis) {class: svc}
+      webs: Agentes de rediseño web {class: svc}
+      juegos: Catálogo de juegos {class: svc}
+      casa3d: Casa 3D {class: svc}
+      renders: Renders 3D {class: svc}
+      otras: Portainer y\nwebs estáticas {class: svc}
+    }
+
+    asistente -> apps: MCP {style: {stroke-width: 3; bold: true}}
+    asistente -> obs
+
+    obs: Observabilidad (monitoring_net) {
+      grid-columns: 3
+      vm: VictoriaMetrics\n(métricas) {class: data}
+      vl: VictoriaLogs\n(logs) {class: data}
+      vt: VictoriaTraces\n(trazas) {class: data}
+      vector: Vector\n(recoge logs y\nmétricas del host) {class: svc}
+      grafana: Grafana\n(paneles) {class: svc}
+    }
+
+    apps -> obs: OTLP y logs JSON
+  }
+
+  host.tsserve -> docker.apps: proxy a 127.0.0.1
+  host.t3 -> docker.obs: OTLP
+}
+
+tailnet -> server.host.tsserve: HTTPS
+router -> server.docker.apps: IP de la LAN
+router -> server.host.dns: DNS
+
+internet: Internet {
+  drive: Google Drive {class: ext}
+  llm: APIs de modelos {class: ext}
+  whatsapp: WhatsApp {class: ext}
+  colab: Google Colab\n(GPU) {class: ext}
+}
+
+server.host.backup -> internet.drive: copia cifrada
+server.host.t3 -> internet.llm
+server.docker.apps -> internet.llm
+server.docker.asistente -> internet.whatsapp
+server.docker.asistente -> internet.llm
+server.docker.apps -> internet.colab: túnel SSH

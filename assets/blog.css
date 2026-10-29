@@ -78,6 +78,25 @@ th { color: var(--text-secondary); font-weight: 600; }
 td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .table-scroll { overflow-x: auto; }
 
+code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+pre {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.5;
+}
+pre code { background: none; border: 0; padding: 0; font-size: inherit; }
+
 /* ---------- post list (home) ---------- */
 .post-card {
   display: block;
@@ -93,6 +112,11 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .post-card h2 { margin: 0 0 6px; font-size: 21px; }
 .post-card .date { color: var(--muted); font-size: 13px; }
 .post-card p { color: var(--text-secondary); margin: 8px 0 0; font-size: 15px; }
+
+.post-card .tag {
+  color: var(--accent);
+  font-weight: 600;
+}
 
 /* ---------- stat tiles ---------- */
 .tiles {
@@ -123,6 +147,15 @@ figure.chart .chart-title { font-weight: 600; font-size: 16px; margin: 0 0 2px; 
 figure.chart .chart-sub { color: var(--text-secondary); font-size: 13px; margin: 0 0 12px; }
 figure.chart svg { display: block; width: 100%; height: auto; }
 figure.chart figcaption { color: var(--muted); font-size: 12px; margin: 8px 4px 6px; }
+figure.diagram {
+  margin: 28px 0;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+}
+figure.diagram img { display: block; width: 100%; height: auto; border-radius: 6px; }
+figure.diagram figcaption { color: var(--muted); font-size: 12px; margin: 8px 4px 2px; }
 .legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 10px 4px 4px; font-size: 13px; color: var(--text-secondary); }
 .legend .key { display: inline-flex; align-items: center; gap: 6px; }
 .legend .swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }

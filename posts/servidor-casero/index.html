@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Un mini PC como servidor casero: red privada, Docker, observabilidad y agentes de IA</title>
+<meta name="description" content="Cómo está montado mi servidor casero: Tailscale sin puertos abiertos, Docker con Portainer, métricas, logs y trazas con VictoriaMetrics, copias cifradas en Google Drive y agentes de IA que siguen las mismas reglas.">
+<link rel="stylesheet" href="../../assets/blog.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="site">
+  <a href="../../">Cuaderno</a>
+  <div class="tagline">Notas sobre inversión y tecnología</div>
+</header>
+
+<article>
+
+<h1>Un mini PC como servidor casero: red privada, Docker, observabilidad y agentes de IA</h1>
+<div class="meta">29 de octubre de 2026 · Tecnología · 6 min de lectura</div>
+
+<p>En casa tengo un mini PC encendido todo el día que hace de servidor. Ahí
+corren mis proyectos personales, un asistente de WhatsApp, el sistema de
+copias de seguridad y los agentes de IA con los que programo. Nada de eso está abierto a Internet: solo se llega desde la red de
+casa o desde mis dispositivos a través de Tailscale.</p>
+
+<p>Este post describe cómo está montado, con un diagrama de todas las piezas y
+las reglas que sigo para que el conjunto no se convierta en un caos.</p>
+
+<figure class="diagram">
+  <a href="infraestructura.svg"><img src="infraestructura.svg" alt="Diagrama de la infraestructura: los clientes llegan por Tailscale o por la red local al mini PC; en él, los servicios del host (Tailscale Serve, DNS, T3 Code y copias) y Docker con el asistente de WhatsApp conectado por MCP a las aplicaciones y el stack de observabilidad; hacia Internet salen las copias a Google Drive y las llamadas a APIs de modelos, WhatsApp y Google Colab."></a>
+  <figcaption>Vista general del servidor. Pulsa en la imagen para verla a tamaño completo.</figcaption>
+</figure>
+
+<div class="tiles">
+  <div class="tile">
+    <div class="label">Hardware</div>
+    <div class="value">Mini PC</div>
+    <div class="note">16 hilos · 12 GB útiles · 1 TB</div>
+  </div>
+  <div class="tile">
+    <div class="label">Contenedores</div>
+    <div class="value">~30</div>
+    <div class="note">en una docena de stacks</div>
+  </div>
+  <div class="tile">
+    <div class="label">Puertos abiertos a Internet</div>
+    <div class="value">0</div>
+    <div class="note">todo pasa por Tailscale</div>
+  </div>
+</div>
+
+<h2>El hardware</h2>
+
+<p>Un mini PC de sobremesa con Ubuntu 26.04, 16 hilos, 12 GB de RAM
+disponibles y 1 TB de disco. Consume poco y da de sobra para una treintena
+de contenedores. Lo único que no tiene es GPU: lo que la
+necesita (renders 3D, por ejemplo) se ejecuta en una VM de Google Colab que el
+servidor enciende y controla por un túnel SSH.</p>
+
+<h2>La red: nada expuesto a Internet</h2>
+
+<p>La regla principal es que ningún servicio se publica en Internet. Hay dos
+formas de llegar al servidor:</p>
+
+<ul>
+  <li><strong>Desde fuera de casa, por Tailscale.</strong> El portátil y el
+  móvil están en mi <em>tailnet</em> (una red privada sobre WireGuard).
+  <strong>Tailscale Serve</strong> publica cada servicio en HTTPS, con un
+  certificado válido, en el nombre del servidor dentro del tailnet. No hace
+  falta abrir puertos en el router ni montar un proxy inverso propio.</li>
+  <li><strong>Desde la red de casa.</strong> El servidor tiene una IP fija
+  reservada en el DHCP del router. Para los dispositivos que no tienen
+  Tailscale, un <code>dnsmasq</code> resuelve los nombres internos a esa IP.</li>
+</ul>
+
+<p>Un detalle importante: <strong>Docker se salta el cortafuegos del
+host</strong>. Un mapeo del tipo <code>8080:8080</code> en un
+<code>docker-compose.yml</code> escucha en todas las interfaces, aunque
+el cortafuegos local lo bloquee. Por eso todos los servicios publican sus
+puertos de forma explícita en dos sitios: <code>127.0.0.1</code> (adonde
+apunta Tailscale Serve) y la IP de la red local.</p>
+
+<pre><code>ports:
+  - "127.0.0.1:8080:8080"     # destino de Tailscale Serve
+  - "${LAN_IP:?}:8080:8080"   # red local</code></pre>
+
+<pre><code>sudo tailscale serve --bg --https=8443 http://127.0.0.1:8080</code></pre>
+
+<p>Los servicios sin autenticación, como las bases de datos o los almacenes de
+métricas, ni siquiera se publican en la red local: solo en
+<code>127.0.0.1</code>.</p>
+
+<h2>Docker y Portainer</h2>
+
+<p>Todo servicio de larga duración (una API, una web, un bot, un
+<em>worker</em>) vive en Docker, con su <code>Dockerfile</code> y su
+<code>docker-compose.yml</code> en el repositorio del proyecto. Cada proyecto
+se despliega como un <em>stack</em> de <strong>Portainer</strong>, así que
+desde una sola interfaz veo qué está corriendo, sus logs y su estado, y puedo
+reiniciarlo desde el móvil.</p>
+
+<h2>Observabilidad: métricas, logs y trazas</h2>
+
+<p>Con tantos servicios, hace falta saber qué pasa sin entrar en cada
+contenedor. El stack es ligero y está entero en Docker:</p>
+
+<div class="table-scroll">
+<table>
+  <thead><tr><th>Pieza</th><th>Qué guarda</th><th>Retención</th></tr></thead>
+  <tbody>
+    <tr><td>VictoriaMetrics</td><td>Métricas del host y de las aplicaciones</td><td>3 meses</td></tr>
+    <tr><td>VictoriaLogs</td><td>Logs de todos los contenedores</td><td>30 días</td></tr>
+    <tr><td>VictoriaTraces</td><td>Trazas de OpenTelemetry</td><td>14 días</td></tr>
+    <tr><td>Vector</td><td>Recoge los logs de Docker y las métricas del host</td><td>—</td></tr>
+    <tr><td>Grafana</td><td>Paneles y exploración</td><td>—</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Para que funcione sin configurar nada por proyecto, todos siguen el mismo
+contrato:</p>
+
+<ul>
+  <li><strong>Logs en JSON de una línea por <code>stdout</code></strong>, con
+  <code>level</code> y <code>message</code>. Nunca en archivos dentro del
+  contenedor. Vector los recoge de Docker y los etiqueta con el nombre del
+  servicio.</li>
+  <li><strong>Métricas y trazas por OTLP</strong> (OpenTelemetry). Cada
+  aplicación lee el destino de variables de entorno: si no están definidas, no
+  exporta nada y no falla.</li>
+  <li>El <code>trace_id</code> activo va dentro de cada línea de log, así que
+  en Grafana se salta de un log a su traza con un clic.</li>
+</ul>
+
+<h2>Copias de seguridad</h2>
+
+<p>Un único sistema para todo el servidor, en vez de un script por
+proyecto:</p>
+
+<ul>
+  <li><strong>restic</strong> cifra y deduplica; <strong>rclone</strong> lo
+  envía a <strong>Google Drive</strong>.</li>
+  <li>Copia diaria de madrugada, con retención de 7 diarias, 4 semanales y 12
+  mensuales. Cada domingo se purgan las copias antiguas y se verifica una
+  muestra de los datos.</li>
+  <li>Cada proyecto declara qué rutas se copian en un archivo de
+  configuración. Si tiene bases de datos, añade un <em>hook</em> que genera
+  un volcado consistente antes de la copia.</li>
+  <li>El resultado de cada copia se envía como métrica a VictoriaMetrics: si
+  falla, se ve en Grafana.</li>
+</ul>
+
+<p>Solo se copia lo que no se puede regenerar: código, configuración,
+volúmenes con datos y volcados. Dependencias, cachés y modelos descargables se
+quedan fuera.</p>
+
+<h2>Agentes de IA que siguen las mismas reglas</h2>
+
+<p>Buena parte del código del servidor lo escriben agentes de IA. Uso
+<strong>T3 Code</strong>, una interfaz web que corre en el propio servidor
+(como servicio de systemd) y desde la que lanzo Claude Code, Codex,
+Antigravity u OpenCode. Como está detrás de Tailscale, puedo trabajar igual
+desde el portátil que desde el móvil.</p>
+
+<p>La pieza que hace que esto escale es un <strong>archivo de instrucciones
+global</strong> con todas las reglas de este post: cómo publicar puertos,
+cómo estructurar los logs, qué variables de OpenTelemetry usar, cómo añadir un
+proyecto a las copias, etc. Cada proyecto tiene además su propio
+<code>AGENTS.md</code>, y los nombres que espera cada herramienta
+(<code>CLAUDE.md</code>, <code>GEMINI.md</code>) son enlaces simbólicos al
+mismo archivo. Da igual qué agente use: todos leen las mismas reglas, y un
+servicio nuevo sale ya con Docker, puertos bien publicados, logs JSON y
+telemetría.</p>
+
+<blockquote>Las convenciones se escriben una vez, en un sitio que leen todos
+los agentes, en lugar de repetirlas en cada conversación.</blockquote>
+
+</article>
+
+<footer class="site">
+  <a href="../../">← Volver al índice</a>
+</footer>
+
+</div>
+</body>
+</html>
